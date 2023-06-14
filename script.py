@@ -22,7 +22,7 @@ filteredDataToWrite = [entry for entry in data if 'Region' in entry and entry['R
 with open(output_file_filtered_data, 'w') as f:
     json.dump(filteredDataToWrite, f, indent=4)
 
-#graph data on time of day (hours)
+#graph data on time of day (hours) (UTC)
 with open(output_file_filtered_data, 'r') as filtered:
     filteredData = json.load(filtered)
 timestamps = [entry["Timestamp (UTC)"] for entry in filteredData]
@@ -41,7 +41,7 @@ for key, value in hourRangesCountedSorted:
     left_coordinates.append(coordCounter)
     coordCounter += 1
 fig, ax = plt.subplots(figsize=(12, 6))
-ax.bar(left_coordinates, counts, tick_label=labels, width=0.6, color=['red', 'black'])
+ax.bar(left_coordinates, counts, tick_label=labels, width=0.6, color=['#FECC00', 'black'])
 ax.set_xlabel('Uren van de dag')
 ax.set_ylabel('Aantal keer in dataset')
 ax.set_title("BeReal momenten (UTC)")
