@@ -40,22 +40,15 @@ for key, value in hourRangesCountedSorted:
     counts.append(value)
     left_coordinates.append(coordCounter)
     coordCounter += 1
-fig, ax = plt.subplots(figsize=(12, 6))  # Adjust the figure size as needed
-
+fig, ax = plt.subplots(figsize=(12, 6))
 ax.bar(left_coordinates, counts, tick_label=labels, width=0.6, color=['red', 'black'])
 ax.set_xlabel('Uren van de dag')
 ax.set_ylabel('Aantal keer in dataset')
 ax.set_title("BeReal momenten (UTC)")
-
-# Adjust the font size of the labels and title
-ax.tick_params(axis='x', labelsize=8)  # Font size for x-axis labels
-ax.tick_params(axis='y', labelsize=8)  # Font size for y-axis labels
-ax.title.set_fontsize(12)  # Font size for the title
-
-# Adjust the spacing between labels
-ax.set_xticks(left_coordinates)  # Set the x-ticks at the desired positions
-ax.set_xticklabels(labels, rotation=45, ha='right')  # Set the x-tick labels and rotate them if needed
-
-plt.tight_layout()  # Ensures labels do not overlap
-
+ax.tick_params(axis='x', labelsize=8)
+ax.tick_params(axis='y', labelsize=8)
+ax.title.set_fontsize(12)
+ax.set_xticks(left_coordinates)
+ax.set_xticklabels(labels, rotation=45, ha='right')
+plt.tight_layout()
 plt.savefig("plot.png")
