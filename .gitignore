@@ -1,2 +1,4 @@
-*.json
+data.json
+europe-west.json
 plot.png
+key.env
