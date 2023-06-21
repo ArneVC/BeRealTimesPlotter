@@ -3,6 +3,7 @@ import os
 from collections import Counter
 import matplotlib.pyplot as plt
 import requests
+from datetime import datetime
 
 # inputs of program
 from_file = False  # True  => get data from input data file (needs to be updated) False => get data live from API
@@ -90,4 +91,11 @@ ax.title.set_fontsize(12)
 ax.set_xticks(left_coordinates)
 ax.set_xticklabels(labels, rotation=45, ha="right")
 plt.tight_layout()
-plt.savefig("plot.png")
+
+# save graph to image with current time in filename
+current_datetime = datetime.now()
+current_datetime_str = (current_datetime.strftime("%Y-%m-%d %H-%M-%S")).replace(
+    " ", "_"
+)
+filename = current_datetime_str + "_plot.png"
+plt.savefig(filename)
