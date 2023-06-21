@@ -6,10 +6,12 @@ import requests
 from datetime import datetime
 
 # inputs of program
-from_file = False  # True  => get data from input data file (needs to be updated) False => get data live from API
+from_file = False  # True  => get data from input data file (data.json) (needs to be updated) False => get data live from API
 input_file = "data.json"  # only if data inputted from file
 value_to_filter = "europe-west"
-output_file_filtered_data = value_to_filter + ".json"
+output_file_filtered_data = (
+    value_to_filter + ".json"
+)  # gets updated everytime script is excecuted
 
 API_KEY = ""
 
