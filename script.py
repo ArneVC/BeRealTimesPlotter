@@ -4,11 +4,12 @@ from collections import Counter
 import matplotlib.pyplot as plt
 import requests
 from datetime import datetime
+from os.path import exists
 
 # inputs of program
 from_file = False  # True  => get data from input data file (data.json) (needs to be updated) False => get data live from API
 input_file = "data.json"  # only if data inputted from file
-value_to_filter = "europe-west"
+value_to_filter = "europe-west"  # us-central / europe-west / asia-west / asia-east
 output_file_filtered_data = (
     value_to_filter + ".json"
 )  # gets updated everytime script is excecuted
@@ -16,10 +17,14 @@ output_file_filtered_data = (
 API_KEY = ""
 
 # getting api  key from .env file and set API_KEY variable
+if not exists("key.env"):
+    print("key.env file containing API key to bereal.devin.fun API needs to exist")
+    exit()
 keyfile = open("key.env", mode="r")
 key = keyfile.read()
 keyfile.close()
 API_KEY = key
+
 
 # remove all other JSON files that are not the input file
 directory = os.path.dirname(os.path.abspath(__file__))
@@ -30,6 +35,13 @@ for file in files:
 
 # filter input data from file to only selected region and output it as a JSON file
 if from_file == True:
+    if not exists(input_file):
+        print(
+            "data input file named "
+            + input_file
+            + " containing JSON data converted from CSV from bereal.devin.fun needs to exist"
+        )
+        exit()
     with open(input_file, "r") as f:
         data = json.load(f)
     filteredDataToWrite = [
@@ -84,9 +96,9 @@ fig, ax = plt.subplots(figsize=(12, 6))
 ax.bar(
     left_coordinates, counts, tick_label=labels, width=0.6, color=["#FECC00", "black"]
 )
-ax.set_xlabel("Uren van de dag")
-ax.set_ylabel("Aantal keer in dataset")
-ax.set_title("BeReal momenten (UTC)")
+ax.set_xlabel("Hours of day")
+ax.set_ylabel("Dataset entries")
+ax.set_title("BeReal moments (UTC)")
 ax.tick_params(axis="x", labelsize=8)
 ax.tick_params(axis="y", labelsize=8)
 ax.title.set_fontsize(12)
