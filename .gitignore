@@ -1,5 +1,4 @@
-data.json
-europe-west.json
+*.json
 *.png
 key.env
 .vscode
