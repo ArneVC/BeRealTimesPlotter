@@ -59,6 +59,10 @@ else:
         + "&limit=NONE&format=JSON",
         headers=headers,
     )
+    if "Service Unavailable".lower() in response.text.lower():
+        print("API is currently unavailable")
+        print("https://status.devin.fun/?ref=offline-db-us-east1")
+        exit()
     data_from_api_regions = response.json()["regions"]
     converted_data = []
     desired_region = value_to_filter
