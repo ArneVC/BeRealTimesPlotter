@@ -117,3 +117,4 @@ current_datetime_str = (current_datetime.strftime("%Y-%m-%d %H-%M-%S")).replace(
 )
 filename = current_datetime_str + "_plot.png"
 plt.savefig(filename)
+print("successfully created new bar graph")
