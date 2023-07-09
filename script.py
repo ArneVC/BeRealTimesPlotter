@@ -56,7 +56,8 @@ else:
     response = requests.get(
         "https://bereal.devin.rest/v1/moments/all?api_key="
         + API_KEY
-        + "&limit=NONE&format=JSON",
+        + "&limit=NONE"
+        + "&format=JSON",
         headers=headers,
     )
     if "Service Unavailable".lower() in response.text.lower():
