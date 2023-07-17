@@ -129,7 +129,11 @@ trend_line = p(x)
 # Plot the bar graph with trend line
 fig, ax = plt.subplots(figsize=(12, 6))
 ax.bar(
-    left_coordinates, counts, tick_label=labels, width=0.6, color=["#FECC00", "black"]
+    np.arange(len(left_coordinates)),
+    counts,
+    tick_label=labels,
+    width=0.6,
+    color=["#FECC00", "black"],
 )
 ax.plot(
     x, trend_line, color="red", linestyle="--", label="Trend Line"
@@ -140,7 +144,7 @@ ax.set_title("BeReal moments (UTC)")
 ax.tick_params(axis="x", labelsize=8)
 ax.tick_params(axis="y", labelsize=8)
 ax.title.set_fontsize(12)
-ax.set_xticks(left_coordinates)
+ax.set_xticks(x)
 ax.set_xticklabels(labels, rotation=45, ha="right")
 ax.legend()  # Add legend for trend line
 plt.tight_layout()
