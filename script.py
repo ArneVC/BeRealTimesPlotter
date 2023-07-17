@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import requests
 from datetime import datetime
 from os.path import exists
+import numpy as np
 
 # inputs of program
 from_file = False  # True  => get data from input data file (data.json) (needs to be updated) False => get data live from API
@@ -117,5 +118,32 @@ current_datetime_str = (current_datetime.strftime("%Y-%m-%d %H-%M-%S")).replace(
     " ", "_"
 )
 filename = current_datetime_str + "_plot.png"
+
+# Generate trend line data
+x = np.arange(len(left_coordinates))
+y = np.array(counts)
+z = np.polyfit(x, y, 1)
+p = np.poly1d(z)
+trend_line = p(x)
+
+# Plot the bar graph with trend line
+fig, ax = plt.subplots(figsize=(12, 6))
+ax.bar(
+    left_coordinates, counts, tick_label=labels, width=0.6, color=["#FECC00", "black"]
+)
+ax.plot(
+    x, trend_line, color="red", linestyle="--", label="Trend Line"
+)  # Add trend line
+ax.set_xlabel("Hours of day")
+ax.set_ylabel("Dataset entries")
+ax.set_title("BeReal moments (UTC)")
+ax.tick_params(axis="x", labelsize=8)
+ax.tick_params(axis="y", labelsize=8)
+ax.title.set_fontsize(12)
+ax.set_xticks(left_coordinates)
+ax.set_xticklabels(labels, rotation=45, ha="right")
+ax.legend()  # Add legend for trend line
+plt.tight_layout()
+
 plt.savefig(filename)
 print("successfully created new bar graph")
