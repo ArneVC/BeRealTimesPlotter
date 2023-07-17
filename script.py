@@ -122,7 +122,7 @@ filename = current_datetime_str + "_plot.png"
 # Generate trend line data
 x = np.arange(len(left_coordinates))
 y = np.array(counts)
-z = np.polyfit(x, y, 1)
+z = np.polyfit(x, y, 2)  # Use a second-degree polynomial fit
 p = np.poly1d(z)
 trend_line = p(x)
 
